@@ -1,33 +1,54 @@
 import pandas as pd
-import numpy as np
-from flask import Flask, request, jsonify
-import pickle
-from sklearn.ensemble import RandomForestClassifier
+from flask import Flask, request, jsonify, render_template
+import json
 
-# Create Flask app
+# Create a Flask app
 app = Flask(__name__)
+@app.route('/')
+def transaction_form():
+    return render_template('transaction.html')
+with open('transactions.json', 'r') as f:
+    transactions = json.load(f)
 
-# Load the trained model (you need to save the model after training)
-model = pickle.load(open("fraud_model.pkl", "rb"))
+def is_fraud(transaction):
+    # Rule 1: High amount (above $10,000 is suspicious)
+    if transaction['amount'] > 10000:
+        return True
 
-# Define a prediction route
-@app.route('/predict', methods=['POST'])
-def predict():
-    # Get the data from the POST request.
+    # Rule 2: Balance mismatch (error in balance calculation)
+    if (transaction['oldBalanceOrig'] - transaction['amount']) != transaction['newBalanceOrig']:
+        return True
+
+    # Rule 3: Zero balance destination with significant amount
+    if transaction['oldBalanceDest'] == 0 and transaction['amount'] > 1000:
+        return True
+
+    # Add more rules as needed
+    return False
+
+# Define the API endpoint
+@app.route('/check_fraud', methods=['POST'])
+def check_fraud():
+    # Get the transaction_id from the POST request
     data = request.get_json(force=True)
-    
-    # Extract input features
-    input_data = pd.DataFrame([data])
-    
-    # Feature engineering (you can modify as per your original code)
-    input_data['errorBalanceOrig'] = input_data['newBalanceOrig'] + input_data['amount'] - input_data['oldBalanceOrig']
-    input_data['errorBalanceDest'] = input_data['oldBalanceDest'] + input_data['amount'] - input_data['newBalanceDest']
+    transaction_id = data.get('transaction_id')
 
-    # Predict using the model
-    prediction = model.predict(input_data)
-    print("coming")
-    # Return prediction
-    return jsonify({'isFraud': int(prediction[0])})
+    # Find the transaction with the given transaction_id
+    transaction = next((tx for tx in transactions if tx["transaction_id"] == transaction_id), None)
 
+    if transaction:
+        print("coming")
+        # Check if the transaction is fraudulent
+        fraud_result = is_fraud(transaction)
+        return jsonify({
+            'transaction_id': transaction_id,
+            'is_fraud': fraud_result
+        })
+    else:
+        return jsonify({
+            'error': 'Transaction not found'
+        }), 404
+
+# Run the Flask app
 if __name__ == '__main__':
     app.run(debug=True)

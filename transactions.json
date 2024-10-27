@@ -1,0 +1,68 @@
+[
+      {
+        "transaction_id": "tx_001",
+        "step": 1,
+        "type": 0,
+        "amount": 1000.0,
+        "oldBalanceOrig": 10000.0,
+        "newBalanceOrig": 9000.0,
+        "oldBalanceDest": 9000.0,
+        "newBalanceDest": 10000.0,
+        "location": 0,
+        "errorBalanceOrig": 0.0,
+        "errorBalanceDest": 0.0
+      },
+      {
+        "transaction_id": "tx_002",
+        "step": 2,
+        "type": 1,
+        "amount": 200.0,
+        "oldBalanceOrig": 500.0,
+        "newBalanceOrig": 300.0,
+        "oldBalanceDest": 0.0,
+        "newBalanceDest": 200.0,
+        "location": 1,
+        "errorBalanceOrig": 0.0,
+        "errorBalanceDest": 0.0
+      },
+      {
+        "transaction_id": "tx_003",
+        "step": 3,
+        "type": 0,
+        "amount": 100000.0,
+        "oldBalanceOrig": 100000.0,
+        "newBalanceOrig": 0.0,
+        "oldBalanceDest": 50000.0,
+        "newBalanceDest": 150000.0,
+        "location": 2,
+        "errorBalanceOrig": 0.0,
+        "errorBalanceDest": 0.0
+      },
+      {
+        "transaction_id": "tx_004",
+        "step": 4,
+        "type": 1,
+        "amount": 50.0,
+        "oldBalanceOrig": 50.0,
+        "newBalanceOrig": 0.0,
+        "oldBalanceDest": 0.0,
+        "newBalanceDest": 50.0,
+        "location": 1,
+        "errorBalanceOrig": 0.0,
+        "errorBalanceDest": 0.0
+      },
+      {
+        "transaction_id": "tx_005",
+        "step": 5,
+        "type": 0,
+        "amount": 5000.0,
+        "oldBalanceOrig": 25000.0,
+        "newBalanceOrig": 20000.0,
+        "oldBalanceDest": 10000.0,
+        "newBalanceDest": 15000.0,
+        "location": 3,
+        "errorBalanceOrig": 0.0,
+        "errorBalanceDest": 0.0
+      }
+]
+  
