@@ -2,10 +2,10 @@
 sivakumarsurasani.pythonanywhere.com
 # Fraudulent Transaction Detection API
 
-This is a Flask-based web application that allows users to check whether a transaction is potentially fraudulent based on transaction data. The application includes a basic logic for fraud detection and serves a simple HTML page where users can input a transaction ID to check its status.
+This is a Flask-based web application that allows users to check whether a transaction is potentially fraudulent based on transaction data. The application includes a basic logic for fraud detection and serves as a simple HTML page where users can input a transaction ID to check its status.
 
 ## Features
-- **Fraud Detection Logic**: Determines if a transaction is fraudulent based on basic rules (e.g., amount threshold).
+- **Fraud Detection Logic**: Determines if a transaction is fraudulent based on basic rules (e.g., amount threshold) and using a trained model which is build using classifiers.
 - **REST API**: Exposes an API endpoint (`/check_fraud`) that accepts transaction IDs via JSON and returns whether the transaction is fraudulent.
 - **HTML Form**: A simple web form to input transaction IDs and display results dynamically.
 - **JSON Data**: Uses a `transactions.json` file to simulate a database of transactions.
@@ -21,6 +21,7 @@ This is a Flask-based web application that allows users to check whether a trans
 - Python 3.x
 - Flask
 - JSON data file (`transactions.json`) with transaction data
+- Model file (.pkl)
 
 ### 1. Clone the repository
 
